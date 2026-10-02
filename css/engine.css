@@ -167,7 +167,7 @@ html[data-theme="light"] .hero-link{color:#6d28d9;}
 .card-row{display:flex; justify-content:space-between; align-items:baseline; gap:0.75rem; flex-wrap:wrap;}
 
 /* chat */
-.chat{display:flex; flex-direction:column;}
+.chat{display:flex; flex-direction:column; container-type:inline-size;}
 .chat-head{position:relative; text-align:center; padding:0 3.75rem;}
 .chat-head .sub{font-size:0.8125rem; color:var(--text-soft); margin-top:0.125rem;}
 .head-icons{position:absolute; top:0; right:0; display:flex; gap:0.125rem;}
@@ -183,7 +183,7 @@ html[data-theme="light"] .hero-link{color:#6d28d9;}
   height:21rem; max-height:56vh; overflow-y:auto; overscroll-behavior:contain;
   scrollbar-width:thin; scrollbar-color:rgba(192,132,252,0.55) transparent;
 }
-@media (min-width:68.75em){ .messages{height:clamp(13.75rem, calc(100vh - 33rem), 26.25rem); max-height:none;} }
+@media (min-width:68.75em){ .messages{height:clamp(13.75rem, calc(100vh - 33rem), 26.25rem); max-height:none;} .composer{gap:0.375rem;} .send{padding:0 0.875rem;} }
 .msg{max-width:94%; padding:0.625rem 0.75rem; border-radius:0.625rem; font-size:0.96875rem; line-height:1.5; white-space:pre-wrap; overflow-wrap:anywhere; text-align:left;}
 .msg.assistant{align-self:flex-start; background:var(--bubble);}
 .msg.user{align-self:flex-end; background:#4f46e5; background-image:linear-gradient(180deg,#5b4ff0,#4f46e5); color:#fff;}
@@ -197,7 +197,7 @@ html[data-theme="light"] .hero-link{color:#6d28d9;}
   border:1.5px solid rgba(129,140,248,0.75); border-radius:0.5625rem; background:var(--bubble); color:var(--text);
   font-family:var(--sans); font-size:max(1rem, 16px); line-height:1.3; outline:none;
 }
-.composer textarea::placeholder{color:var(--text-dim);}
+.composer textarea::placeholder{color:var(--text-dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
 .composer textarea:focus{border-color:var(--purple-soft); box-shadow:0 0 0 0.1875rem rgba(168,85,247,0.25);}
 .mic{
   width:2.75rem; height:2.75rem; flex-shrink:0; border-radius:50%; cursor:pointer;
@@ -217,6 +217,13 @@ html[data-theme="light"] .hero-link{color:#6d28d9;}
   box-shadow:0 0.5rem 1.25rem rgba(99,102,241,0.38);
 }
 .send:disabled{opacity:.55; cursor:not-allowed;}
+
+/* When the chat card itself is narrow (the four-column desktop row), the text box gets its own full-width line
+   and the mic and Send sit underneath on the right, so typing room never shrinks to a sliver. */
+@container (max-width:20rem){
+  .composer{flex-wrap:wrap; justify-content:flex-end;}
+  .composer textarea{flex:1 1 100%;}
+}
 
 /* expanded chat */
 .chat.expanded{
@@ -239,6 +246,24 @@ body.chat-open{overflow:hidden;}
 #fitValue.on{color:var(--text);}
 .gauge{height:0.3125rem; border-radius:0.3125rem; margin-top:0.625rem; background:var(--well); overflow:hidden;}
 .gauge-fill{display:block; height:100%; width:0; border-radius:inherit; background:linear-gradient(90deg,var(--indigo),var(--purple) 60%,var(--pink)); transition:width .6s ease;}
+
+/* estimated total: the number people came for, shown big */
+.total-box{
+  display:flex; flex-direction:column; gap:0.125rem; margin-top:0.875rem; padding:0.75rem 0.875rem 0.8125rem;
+  border-radius:0.75rem; border:1px solid rgba(168,85,247,0.45);
+  background:rgba(99,102,241,0.16);
+}
+html[data-theme="light"] .total-box{background:rgba(99,102,241,0.08); border-color:rgba(124,58,237,0.35);}
+.total-label{font-size:0.78125rem; font-weight:600; color:var(--text-soft);}
+.total-amount{font-family:var(--serif); font-weight:700; font-size:clamp(2.25rem, 3.4vw, 2.875rem); line-height:1.05; letter-spacing:-0.02em; color:var(--text); overflow-wrap:anywhere;}
+.total-box.empty .total-amount{font-size:1.5rem;}
+.total-math{font-size:0.8125rem; color:var(--text-soft);}
+.total-box.set{border-color:var(--purple-soft); box-shadow:0 0 0 0.1875rem rgba(168,85,247,0.18), 0 0.75rem 1.75rem rgba(99,102,241,0.25);}
+/* the same total, inside the chat on phones where the cards sit below the conversation */
+.chat-total{align-self:flex-start; max-width:94%; display:flex; flex-direction:column; gap:0.0625rem; padding:0.625rem 0.875rem; border-radius:0.625rem; border:1px solid var(--purple-soft); background:rgba(99,102,241,0.16); text-align:left;}
+html[data-theme="light"] .chat-total{background:rgba(99,102,241,0.08);}
+.chat-total .total-amount{font-size:2rem;}
+@media (min-width:68.75em){ .chat-total{display:none;} }
 
 /* shortlist */
 .donut-wrap{display:flex; justify-content:center; margin:0.875rem 0 0.625rem;}
