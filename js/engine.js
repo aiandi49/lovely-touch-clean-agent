@@ -30,7 +30,9 @@
     } catch (e) {}
   }
   function validTurn(m) {
-    return m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string';
+    if (!(m && (m.role === 'user' || m.role === 'assistant') && typeof m.content === 'string')) return false;
+    if (m.total && !(typeof m.total.title === 'string' && Number(m.total.hours) >= 1 && Number(m.total.hours) <= 40)) delete m.total;
+    return true;
   }
 
   /* ── guide lookups ── */
@@ -63,7 +65,10 @@
   function renderConversation() {
     messagesEl.textContent = '';
     addMsg('assistant', GREETING);
-    state.conversation.forEach(function (m) { addMsg(m.role, m.content); });
+    state.conversation.forEach(function (m) {
+      addMsg(m.role, m.content);
+      if (m.total && m.total.hours) { messagesEl.appendChild(totalNode(m.total.title, m.total.hours)); messagesEl.scrollTop = messagesEl.scrollHeight; }
+    });
     setCount();
   }
 
@@ -82,11 +87,15 @@
         if (typeof v === 'string' || typeof v === 'number') details[String(k).slice(0, 40)] = String(v).slice(0, 120);
       });
     }
+    var hours = Math.round(Number(m.hours));
+    if (!isFinite(hours) || hours < 1 || hours > 40) hours = null;
+    Object.keys(details).forEach(function (k) { if (/total|price|cost|\$/i.test(k + ' ' + details[k])) delete details[k]; });
     return {
       id: id,
       title: typeof m.title === 'string' ? m.title.slice(0, 80) : id,
       score: score,
       why: typeof m.why === 'string' ? m.why.slice(0, 280) : '',
+      hours: hours,
       details: details
     };
   }
@@ -105,6 +114,27 @@
     return { clean: kept.join('\n').replace(/\n{3,}/g, '\n\n').trim(), matches: found };
   }
 
+  /* ── estimated total: computed here from the guide's rates, never by the model ── */
+  function rates() {
+    var b = gub && gub.business;
+    return { first: b && Number(b.rateFirstHour) || 80, extra: b && Number(b.rateAdditionalHour) || 25 };
+  }
+  function totalFor(hours) {
+    var r = rates();
+    return { amount: r.first + r.extra * (hours - 1), math: hours === 1
+      ? 'About 1 hour: the $' + r.first + ' first-hour rate'
+      : 'About ' + hours + ' hours: $' + r.first + ' first hour + ' + (hours - 1) + ' × $' + r.extra };
+  }
+  function money(n) { return '$' + n.toLocaleString('en-US'); }
+  function totalNode(title, hours) {
+    var t = totalFor(hours);
+    var box = document.createElement('div'); box.className = 'chat-total';
+    box.appendChild(Object.assign(document.createElement('span'), { className: 'total-label', textContent: 'Estimated total · ' + title }));
+    box.appendChild(Object.assign(document.createElement('span'), { className: 'total-amount', textContent: money(t.amount) }));
+    box.appendChild(Object.assign(document.createElement('span'), { className: 'total-math', textContent: t.math + '. Confirmed at your free estimate.' }));
+    return box;
+  }
+
   /* ── cards ── */
   function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
   function row(list, label, value) {
@@ -117,6 +147,24 @@
     $('arc').setAttribute('stroke-dashoffset', String(CIRC * (1 - score / 100)));
     $('arc').style.opacity = score > 0 ? '1' : '0';
     $('pct').textContent = score > 0 ? String(score) : '0';
+  }
+
+  function renderTotal(top, entry) {
+    var box = $('totalBox');
+    if (top && top.hours) {
+      var t = totalFor(top.hours);
+      box.className = 'total-box set';
+      $('totalLabel').textContent = 'Estimated total · ' + (entry ? entry.title : top.title);
+      $('totalAmount').textContent = money(t.amount);
+      $('totalMath').textContent = t.math + '. Confirmed at your free estimate.';
+    } else {
+      box.className = 'total-box empty';
+      $('totalLabel').textContent = 'Estimated total';
+      $('totalAmount').textContent = 'From ' + money(rates().first);
+      $('totalMath').textContent = top
+        ? 'Tell the agent roughly how many hours and your total appears here.'
+        : 'Tell the agent roughly how many hours to see your total.';
+    }
   }
 
   function renderCards() {
@@ -167,6 +215,7 @@
       fit.textContent = top.score + ' / 100';
       fit.className = 'block-title on';
       $('gaugeFill').style.width = top.score + '%';
+      renderTotal(top, entry);
       var keys = Object.keys(top.details);
       if (keys.length) {
         keys.forEach(function (k) { row(extra, k, top.details[k]); });
@@ -179,6 +228,7 @@
       fit.textContent = 'Not scored yet';
       fit.className = 'block-title';
       $('gaugeFill').style.width = '0%';
+      renderTotal(null, null);
     }
 
     // Listing details: always from the guide itself, never from the model
@@ -221,13 +271,15 @@
     fetch('/api/chat', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ messages: state.conversation.slice(-MAX_SEND) })
+      body: JSON.stringify({ messages: state.conversation.slice(-MAX_SEND).map(function (m) { return { role: m.role, content: m.content }; }) })
     }).then(function (r) {
-      return r.json().catch(function () { return {}; }).then(function (data) { return { ok: r.ok, data: data }; });
+      return r.json().catch(function () { return {}; }).then(function (data) { return { ok: r.ok, status: r.status, data: data || {} }; });
     }).then(function (res) {
       thinking.remove();
       if (!res.ok || typeof res.data.text !== 'string') {
-        var msg = (res.data && typeof res.data.error === 'string') ? res.data.error : "The assistant couldn't answer just now. Try again in a moment, or call or text 480-246-7507.";
+        var msg = (res.data && typeof res.data.error === 'string') ? res.data.error
+          : res.status === 429 ? "You've sent a lot of messages in a short time. Wait a minute and try again, or call or text 480-246-7507."
+          : "The assistant couldn't answer just now. Try again in a moment, or call or text 480-246-7507.";
         addMsg('assistant', msg, 'error');
         state.conversation.pop();
         setCount(); save(); setStatus('error');
@@ -235,8 +287,15 @@
       }
       var parsed = extractMatches(res.data.text);
       var visible = parsed.clean || 'Here are the services that fit best.';
-      state.conversation.push({ role: 'assistant', content: visible });
+      var turn = { role: 'assistant', content: visible };
+      var priced = parsed.matches.filter(function (m) { return m.hours; })[0];
+      if (priced) {
+        var pe = entryById(priced.id);
+        turn.total = { title: pe ? pe.title : priced.title, hours: priced.hours };
+      }
+      state.conversation.push(turn);
       addMsg('assistant', visible);
+      if (turn.total) { messagesEl.appendChild(totalNode(turn.total.title, turn.total.hours)); messagesEl.scrollTop = messagesEl.scrollHeight; }
       if (parsed.matches.length) { state.matches = parsed.matches; state.selected = parsed.matches[0].id; }
       setCount(); save(); renderCards(); setStatus('live');
     }).catch(function () {
@@ -248,6 +307,23 @@
       busy = false; sendBtn.disabled = false;
     });
   }
+
+  /* Placeholder: the longest wording that fits the box at the current width and text size. */
+  var PLACEHOLDERS = ['Describe your space…', 'Your space…', 'Type here…'];
+  var measure = document.createElement('canvas').getContext('2d');
+  function fitPlaceholder() {
+    var cs = getComputedStyle(input);
+    var room = input.clientWidth - parseFloat(cs.paddingLeft) - parseFloat(cs.paddingRight) - 2;
+    if (!(room > 0) || !measure) return;
+    measure.font = cs.fontWeight + ' ' + cs.fontSize + ' ' + cs.fontFamily;
+    var pick = PLACEHOLDERS[PLACEHOLDERS.length - 1];
+    for (var i = 0; i < PLACEHOLDERS.length; i++) { if (measure.measureText(PLACEHOLDERS[i]).width <= room) { pick = PLACEHOLDERS[i]; break; } }
+    if (input.placeholder !== pick) input.placeholder = pick;
+  }
+  if (window.ResizeObserver) new ResizeObserver(fitPlaceholder).observe(input);
+  window.addEventListener('resize', fitPlaceholder);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitPlaceholder);
+  fitPlaceholder();
 
   sendBtn.addEventListener('click', send);
   input.addEventListener('keydown', function (e) {
