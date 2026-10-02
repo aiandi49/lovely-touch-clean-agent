@@ -32,9 +32,16 @@ Later updates arrive as changed files only, at the same paths. Drop them into th
    - Optionally `ANTHROPIC_MODEL`; it defaults to `claude-sonnet-5-5`.
    - Give Preview a separate low-limit key, or none.
 4. **Deployments → Redeploy.** Environment variables only apply to new deployments.
-5. **Firewall → Rules → Add rule:**
-   - If request path equals `/api/chat`, then **Rate limit**.
-   - Fixed window, 20 requests per 60 seconds, keyed by IP, action **Deny** (429).
+5. **Rate limit (stops anyone hammering your API key).** In Vercel, open the project, then **Firewall → Add New → Rate Limit** (on some screens it's **Configure → + New Rule**). Fill it in:
+   - **Name:** Limit chat requests.
+   - **If:** Request Path, equals, `/api/chat`.
+   - **Then:** Rate Limit, **Fixed Window**.
+   - **Time Window:** 60 seconds.
+   - **Request Limit:** 10.
+   - **Key:** IP.
+   - **Action:** Default (429).
+
+   Then **Save Rule → Review Changes → Publish**. Ten messages a minute per visitor is plenty for a real person typing. The page shows a plain "wait a minute" message to anyone who goes over.
 
 ## What's in the folder
 
@@ -62,7 +69,7 @@ No build step and no dependencies.
 Works once deployed with a key:
 
 - A real conversation that ends in a specific recommendation and next step.
-- Price math from the real rates ($80 first hour, $25 each hour after).
+- An **Estimated total** box with a large dollar amount. The agent only supplies the number of hours the visitor gave; the page does the math from the rates in `data/gub.json`, so the total can't be miscalculated. On phones and tablets the total also appears right in the chat.
 - Light/dark theme and four text sizes on both pages, remembered between visits.
 - **Voice input.** Tap the microphone and speak; the words land in the box to check before sending.
   - It uses the browser's built-in speech recognition, so it works in Chrome, Edge and Safari. Where a browser doesn't support it, the button hides itself.
