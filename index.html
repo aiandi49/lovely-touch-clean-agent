@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark" data-font-size="md">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Clean Agent — A Lovely Touch of Clean, Phoenix AZ</title>
+<meta name="description" content="Describe your home, office or move and the Clean Agent matches you with the right A Lovely Touch of Clean service, the price picture and how to book a free estimate.">
+<meta name="theme-color" content="#0d0b24">
+<script>(function(){var d=document.documentElement;try{var t=localStorage.getItem('pref-theme'),f=localStorage.getItem('pref-font-size');if(t==='light'||t==='dark')d.setAttribute('data-theme',t);if(f==='sm'||f==='md'||f==='lg'||f==='xl')d.setAttribute('data-font-size',f);}catch(e){}})();</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&amp;family=Inter:wght@400;500;600;700&amp;display=swap">
+<link rel="stylesheet" href="css/engine.css">
+</head>
+<body>
+
+<div class="stage">
+  <div class="bubbles" aria-hidden="true"><span class="bubble b1"></span><span class="bubble b2"></span><span class="bubble b3"></span></div>
+
+  <header class="topbar">
+    <nav class="nav" aria-label="Main">
+      <a class="brand" href="index.html"><span class="brand-mark" aria-hidden="true"></span>Clean Agent</a>
+      <div class="nav-links">
+        <a href="index.html" aria-current="page">Agent</a>
+        <a href="guide.html">Guide</a>
+        <a href="https://lovelytouchcleaning.com" rel="noopener">Main site</a>
+      </div>
+      <div class="controls">
+        <button class="ctl theme" type="button" data-theme-toggle aria-pressed="true" aria-label="Dark theme on. Switch to light theme"><span class="sun" aria-hidden="true"></span><span data-theme-label>Light</span></button>
+        <div class="sizes" role="group" aria-label="Text size">
+          <button class="ctl size s-sm" type="button" data-size="sm" aria-pressed="false" aria-label="Text size Small">A</button>
+          <button class="ctl size s-md" type="button" data-size="md" aria-pressed="true" aria-label="Text size Normal (selected)">A</button>
+          <button class="ctl size s-lg" type="button" data-size="lg" aria-pressed="false" aria-label="Text size Large">A</button>
+          <button class="ctl size s-xl" type="button" data-size="xl" aria-pressed="false" aria-label="Text size Largest">A</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <span class="hero-tag">Phoenix home &amp; office cleaning</span>
+    <h1>Your lovely clean, <span class="grad">matched.</span></h1>
+    <p>Describe your home, office or move. The conversation runs on the left; the right service, the price and how to book fill in on the right.</p>
+    <a class="hero-link" href="guide.html">Prefer to read? Open the cleaning guide</a>
+  </section>
+
+  <section class="board" aria-label="Clean Agent">
+    <div class="card chat" id="chat">
+      <div class="chat-head">
+        <h2>Clean Agent</h2>
+        <p class="sub">A Lovely Touch of Clean, LLC</p>
+        <span class="count-chip" id="countChip"><span class="dot"></span><span id="countLabel">0 messages this session</span></span>
+        <div class="head-icons">
+          <button class="icon" id="resetBtn" type="button" title="Start over" aria-label="Start over">
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3h-3"/></svg>
+          </button>
+          <button class="icon" id="expandBtn" type="button" title="Expand chat" aria-label="Expand chat" aria-pressed="false">
+            <svg class="ico-expand" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2.5 6V2.5H6M10 2.5h3.5V6M13.5 10v3.5H10M6 13.5H2.5V10"/></svg>
+            <svg class="ico-collapse" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 2.5V6H2.5M13.5 6H10V2.5M10 13.5V10h3.5M2.5 10H6v3.5"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="messages" id="messages" aria-live="polite"></div>
+      <div class="composer">
+        <label class="sr-only" for="chatInput">Describe what you need cleaned</label>
+        <textarea id="chatInput" rows="1" maxlength="1500" placeholder="Describe your space…" enterkeyhint="send"></textarea>
+        <button class="mic" id="micBtn" type="button" title="Speak instead" aria-label="Speak instead of typing" aria-pressed="false" hidden>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><path d="M12 18v3"/><path d="M8.5 21h7"/></svg>
+        </button>
+        <button class="send" id="sendBtn" type="button">Send</button>
+      </div>
+      <p class="voice-note" id="voiceNote" role="status" hidden></p>
+    </div>
+
+    <div class="card result" id="matchCard">
+      <span class="match-tag" id="matchTag">Start here</span>
+      <div class="match-name" id="matchName">$80 first hour</div>
+      <p class="block-text" id="matchWhy">Then $25 for each hour after. Every estimate is free and confirmed with you before any work starts.</p>
+      <div class="divider">
+        <div class="card-row"><span class="block-title">Fit</span><span class="block-title" id="fitValue">Not scored yet</span></div>
+        <div class="gauge" aria-hidden="true"><span class="gauge-fill" id="gaugeFill"></span></div>
+      </div>
+      <ul class="terms extra" id="matchExtra" hidden></ul>
+    </div>
+
+    <div class="card result">
+      <div class="card-row"><h3 class="mini-h">Shortlist</h3><h3 class="mini-h" id="shortValue">0 picks</h3></div>
+      <div class="donut-wrap">
+        <div class="donut" role="img" id="donut" aria-label="Top score: none yet">
+          <svg viewBox="0 0 100 100" aria-hidden="true">
+            <defs><linearGradient id="arcGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#6366f1"/><stop offset="0.55" stop-color="#a855f7"/><stop offset="1" stop-color="#f472b6"/></linearGradient></defs>
+            <circle class="track" cx="50" cy="50" r="40" fill="none" stroke-width="9"/>
+            <circle class="arc" id="arc" cx="50" cy="50" r="40" fill="none" stroke="url(#arcGrad)" stroke-width="9" stroke-linecap="round" stroke-dasharray="251.33" stroke-dashoffset="251.33"/>
+          </svg>
+          <div class="center"><span class="pct" id="pct">0</span><span class="lbl" id="pctLabel">top score</span></div>
+        </div>
+      </div>
+      <p class="center-text" id="shortText">Your shortlist fills in as you chat. Tap a pick to compare.</p>
+      <div class="picks" id="picks" role="group" aria-label="Recommended services"></div>
+    </div>
+
+    <div class="card result">
+      <h3 class="mini-h">Listing details</h3>
+      <ul class="terms" id="terms">
+        <li><span>Business</span><span>A Lovely Touch of Clean, LLC</span></li>
+        <li><span>Serves</span><span>Phoenix, Arizona</span></li>
+        <li><span>Homes &amp; offices</span><span>Both</span></li>
+        <li><span>Estimate</span><span>Free, no obligation</span></li>
+      </ul>
+      <div class="next">
+        <div class="block-title">Next step</div>
+        <p class="block-text" id="nextText">Tell the agent what needs cleaning, or skip ahead and call or text for a free estimate.</p>
+        <div class="cta-row">
+          <a class="cta" href="tel:+14802467507">Call 480-246-7507</a>
+          <a class="cta ghost" href="sms:+14802467507">Text instead</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<section class="notes" aria-labelledby="notesTitle">
+  <div class="notes-inner">
+    <h2 id="notesTitle">What's real on this page</h2>
+    <p><strong>Live answers.</strong> The chat sends your conversation to this site's own server, which asks Claude to answer using only A Lovely Touch of Clean's guide: its services, its rates and how to book. Every reply is written fresh, and the cards on the right fill from that same guide.</p>
+    <p><strong>Real prices, honest totals.</strong> $80 covers the first hour and $25 covers each hour after. The agent can do that math for you, but how long a job takes is confirmed by the team at your free estimate, before any work starts.</p>
+    <p><strong>What it can't do.</strong> It can't book a date, check the calendar, send a message or take payment. To book, call or text 480-246-7507 or email service@lovelytouchcleaning.com.</p>
+    <p><strong>Talk instead of typing.</strong> Tap the microphone, speak, and your words appear in the box so you can check them before you send. Your browser turns speech into text, and depending on the browser that can happen on its maker's servers (Google for Chrome, Apple for Safari). Where a browser doesn't support it, the microphone hides itself.</p>
+    <p><strong>Your conversation stays in this tab.</strong> It's kept in your browser only until you close the tab, and nothing is saved to an account. Please don't share payment details or door codes in the chat.</p>
+  </div>
+</section>
+
+<footer>A Lovely Touch of Clean, LLC · Phoenix, Arizona · <a href="guide.html">Open the cleaning guide</a></footer>
+
+<script src="js/prefs.js"></script>
+<script src="js/engine.js"></script>
+</body>
+</html>

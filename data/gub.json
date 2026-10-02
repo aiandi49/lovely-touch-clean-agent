@@ -1,0 +1,195 @@
+{
+  "business": {
+    "name": "A Lovely Touch of Clean, LLC",
+    "short": "A Lovely Touch of Clean",
+    "area": "Phoenix, Arizona",
+    "phone": "480-246-7507",
+    "phoneHref": "+14802467507",
+    "email": "service@lovelytouchcleaning.com",
+    "website": "https://lovelytouchcleaning.com",
+    "address": "3411 N 16th Street, Phoenix, AZ 85016",
+    "rateFirstHour": 80,
+    "rateAdditionalHour": 25
+  },
+  "entries": [
+    {
+      "id": "house-cleaning",
+      "kind": "service",
+      "title": "House cleaning",
+      "summary": "Routine upkeep or a deep clean that leaves every room fresh, tidy and welcoming.",
+      "body": "House cleaning is the core of what A Lovely Touch of Clean does. Some clients want regular upkeep so the house never gets away from them; others want one thorough deep clean to reset a space. Either way the clean is built around your home and your schedule rather than a one-size-fits-all checklist. Tell the team which rooms matter most, anything that needs extra care, and how often you'd like them to come.",
+      "tags": ["home", "house", "apartment", "condo", "residential", "routine", "recurring", "weekly", "deep clean", "kitchen", "bathroom", "bedroom", "dust", "floors", "guests", "reset", "messy"],
+      "details": {
+        "For": "Homes, apartments and condos",
+        "Kind of clean": "Routine upkeep or deep clean",
+        "Rate": "$80 first hour, $25 each hour after",
+        "Estimate": "Free, confirmed before work starts"
+      }
+    },
+    {
+      "id": "office-cleaning",
+      "kind": "service",
+      "title": "Office cleaning",
+      "summary": "Dependable commercial cleaning that keeps a workplace sharp, healthy and welcoming.",
+      "body": "Offices and small businesses get the same care as a home, scheduled around when you need it. A clean workplace says a lot about a business to the people who walk in, and it keeps the team healthier day to day. Share the size of the space, how many rooms or restrooms there are, and what days and times work best.",
+      "tags": ["office", "business", "commercial", "workplace", "shop", "store", "suite", "restroom", "break room", "lobby", "desk", "clinic", "salon"],
+      "details": {
+        "For": "Offices and small businesses",
+        "Scheduling": "Built around your business hours",
+        "Rate": "$80 first hour, $25 each hour after",
+        "Estimate": "Free, confirmed before work starts"
+      }
+    },
+    {
+      "id": "laundry-wash-fold",
+      "kind": "service",
+      "title": "Laundry and wash-fold",
+      "summary": "Washed, dried, neatly folded and ready to put away, so laundry day is handled.",
+      "body": "Laundry piles up fastest when life gets busy. The team washes, dries and folds so everything is ready to go back in the drawers. It pairs naturally with a house clean or with ironing, and it's a common add-on for busy families.",
+      "tags": ["laundry", "wash", "fold", "clothes", "towels", "sheets", "linens", "bedding", "busy", "family"],
+      "details": {
+        "For": "Clothes, towels and bedding",
+        "Pairs well with": "Ironing or house cleaning",
+        "Rate": "$80 first hour, $25 each hour after",
+        "Estimate": "Free, confirmed before work starts"
+      }
+    },
+    {
+      "id": "ironing",
+      "kind": "service",
+      "title": "Ironing",
+      "summary": "Crisp, pressed clothes folded and ready, one less chore on your list.",
+      "body": "Work shirts, dress clothes and linens come back pressed and folded. Ironing is easy to add to a laundry or house-cleaning visit, so it's worth mentioning when you ask for your estimate.",
+      "tags": ["ironing", "iron", "press", "pressed", "shirts", "dress clothes", "uniform", "linens", "wrinkles"],
+      "details": {
+        "For": "Shirts, dress clothes and linens",
+        "Pairs well with": "Laundry and wash-fold",
+        "Rate": "$80 first hour, $25 each hour after",
+        "Estimate": "Free, confirmed before work starts"
+      }
+    },
+    {
+      "id": "packing",
+      "kind": "service",
+      "title": "Packing for a move",
+      "summary": "Careful, organized packing: everything boxed, labeled and ready to go.",
+      "body": "Moving is stressful enough without boxing up a whole house alone. The team packs room by room and labels as they go, so moving day starts organized and unpacking at the other end is easier. Share your move date and roughly how many rooms need packing.",
+      "tags": ["move", "moving", "moving out", "pack", "packing", "boxes", "label", "relocate", "relocation"],
+      "details": {
+        "For": "Homes and offices on the move",
+        "Pairs well with": "Unpacking at the new place",
+        "Rate": "$80 first hour, $25 each hour after",
+        "Estimate": "Free, confirmed before work starts"
+      }
+    },
+    {
+      "id": "unpacking",
+      "kind": "service",
+      "title": "Unpacking and settling in",
+      "summary": "The team unpacks, organizes and sets up your new space so it feels like home faster.",
+      "body": "After a move, boxes can sit for weeks. The team unpacks, puts things where they belong and sets up the rooms so the new place is livable right away. It's the natural second half of a packing job.",
+      "tags": ["move", "moving", "moving in", "new home", "new place", "unpack", "unpacking", "boxes", "set up", "settle"],
+      "details": {
+        "For": "New homes and offices",
+        "Pairs well with": "Packing before the move",
+        "Rate": "$80 first hour, $25 each hour after",
+        "Estimate": "Free, confirmed before work starts"
+      }
+    },
+    {
+      "id": "organizing",
+      "kind": "service",
+      "title": "Home organizing",
+      "summary": "Organizing that makes the most of your space: freshly organized, not just cleaned.",
+      "body": "Sometimes a room is clean but still doesn't work. Organizing help sorts closets, pantries, garages and cluttered rooms so everything has a place and stays easier to keep tidy. It works well on its own or alongside a deep clean.",
+      "tags": ["organize", "organizing", "declutter", "clutter", "closet", "pantry", "garage", "storage", "space", "tidy"],
+      "details": {
+        "For": "Closets, pantries and cluttered rooms",
+        "Pairs well with": "A deep house clean",
+        "Rate": "$80 first hour, $25 each hour after",
+        "Estimate": "Free, confirmed before work starts"
+      }
+    },
+    {
+      "id": "pricing",
+      "kind": "info",
+      "title": "How pricing works",
+      "summary": "One clear rate: $80 covers the first hour, then $25 for each hour after. No hidden fees.",
+      "body": "Every job starts with a flat base rate of $80 that covers the first hour of professional cleaning, then $25 for every hour after that. The final estimate depends on the size of the space and the service, and it's always confirmed with you before anyone starts, with no obligation. The totals below are simple math from those two rates; how many hours a job takes is something the team confirms at your free estimate.",
+      "tags": ["price", "pricing", "cost", "rate", "how much", "fee", "budget", "afford", "hour", "hours", "estimate", "quote", "total"],
+      "details": {
+        "1 hour": "$80",
+        "2 hours": "$105",
+        "3 hours": "$130",
+        "4 hours": "$155",
+        "5 hours": "$180",
+        "6 hours": "$205"
+      }
+    },
+    {
+      "id": "free-estimate",
+      "kind": "info",
+      "title": "Getting your free estimate",
+      "summary": "Call or text 480-246-7507, or email service@lovelytouchcleaning.com. No obligation.",
+      "body": "The fastest way to book is to call or text 480-246-7507. Share the kind of space (home or office), roughly how big it is, which service you want, and a date that works. You can also email service@lovelytouchcleaning.com. The team confirms the estimate and the total before any work begins, and there's no obligation to book.",
+      "tags": ["book", "booking", "schedule", "appointment", "estimate", "quote", "call", "text", "phone", "email", "contact", "reach", "available", "availability", "when", "date"],
+      "details": {
+        "Call or text": "480-246-7507",
+        "Email": "service@lovelytouchcleaning.com",
+        "What to share": "Space type, size, service and a date",
+        "Cost of the estimate": "Free, no obligation"
+      }
+    },
+    {
+      "id": "trust-and-safety",
+      "kind": "info",
+      "title": "People you can trust in your home",
+      "summary": "Every cleaner is bonded and insured, fingerprint-cleared and personally trained.",
+      "body": "Inviting someone into your home or office takes trust, so every person on the team is screened before they ever set foot in your space. Every cleaner is bonded and insured. Every team member is fingerprint-cleared through the police before their first job. And every cleaner is personally trained in the company's own standards, so the clean is the same careful quality on every visit.",
+      "tags": ["trust", "safe", "safety", "bonded", "insured", "insurance", "background", "fingerprint", "screened", "vetted", "trained", "reliable", "kids", "pets", "security"],
+      "details": {
+        "Bonded and insured": "Every cleaner",
+        "Fingerprint-cleared": "Before their first job",
+        "Training": "Personally trained to house standards"
+      }
+    },
+    {
+      "id": "eco-friendly",
+      "kind": "info",
+      "title": "Eco-friendly products",
+      "summary": "Cleaning with eco-friendly products, for a healthy, inviting space.",
+      "body": "A Lovely Touch of Clean uses eco-friendly cleaning products as part of keeping homes and offices healthy and inviting. If anyone in the home has allergies or sensitivities, or you prefer particular products, mention it when you ask for your estimate so it can be planned for.",
+      "tags": ["eco", "eco-friendly", "green", "natural", "products", "chemicals", "allergies", "sensitive", "healthy", "kids", "pets", "safe"],
+      "details": {
+        "Products": "Eco-friendly",
+        "Allergies or preferences": "Mention them at your estimate"
+      }
+    },
+    {
+      "id": "our-approach",
+      "kind": "info",
+      "title": "How the team treats your space",
+      "summary": "Customized cleaning, never a one-size-fits-all checklist, with every space treated like their own.",
+      "body": "The team believes a clean environment is key to your well-being. Every plan is built around your space and your schedule, and the team treats every space as though it were their own, with respect and integrity. They meet clients where they are and honor what matters to them; if a client of faith would like to share a moment of prayer in their home, the team is glad to.",
+      "tags": ["approach", "values", "custom", "customized", "respect", "faith", "prayer", "personal", "care", "satisfaction"],
+      "details": {
+        "Plans": "Built around your space and schedule",
+        "Focus": "Your satisfaction",
+        "Faith-friendly": "Happy to share a moment of prayer"
+      }
+    },
+    {
+      "id": "service-area",
+      "kind": "info",
+      "title": "Where the team works",
+      "summary": "Homes and offices across Phoenix, Arizona. Based at 3411 N 16th Street, Phoenix.",
+      "body": "A Lovely Touch of Clean serves homes and businesses across Phoenix, Arizona, and is based at 3411 N 16th Street, Phoenix, AZ 85016. If you're outside Phoenix or not sure your area is covered, call or text 480-246-7507 and ask. Availability changes week to week, so the team confirms dates directly rather than posting fixed hours.",
+      "tags": ["area", "where", "location", "phoenix", "arizona", "az", "near me", "cover", "serve", "address", "hours", "open", "weekend"],
+      "details": {
+        "Serves": "Phoenix, Arizona",
+        "Based at": "3411 N 16th Street, Phoenix, AZ 85016",
+        "Days and times": "Confirmed by phone or text"
+      }
+    }
+  ]
+}
